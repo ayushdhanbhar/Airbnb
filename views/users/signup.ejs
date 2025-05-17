@@ -1,0 +1,25 @@
+<% layout("layouts/boilerplate") -%>
+<div class="signup-container">
+  <div class="form-title">Sign up for Airbnb</div>
+ <form class="needs-validation" novalidate action="/signup" method="POST">
+  <div class="mb-3">
+    <label for="username" class="form-label">Username</label>
+    <input type="text" class="form-control" id="username" name="username" required>
+    <div class="valid-feedback">Username looks good</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" required>
+  </div>
+
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" required>
+  </div>
+
+  <button type="submit" class="btn btn-danger w-100">Sign Up</button>
+</form>
+
+  <p class="text-center mt-3">Already have an account? <a href="/login.ejs">Log in</a></p>
+</div>
