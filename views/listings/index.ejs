@@ -2,37 +2,71 @@
 
   <body>
     <style>
-      #filters {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-      }
+.filters-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
 
-      .filter {
-        text-align: center;
-        margin-right: 2rem;
-        margin-top: 2rem;
-        opacity: 0.7;
-      }
+#filters {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  scrollbar-width: none; /* Firefox */
+}
 
-      .filter:hover {
-        opacity: 1;
-        cursor: pointer;
-      }
-      .tax-info{
-        display:none;
-      }
-      .tax-toggle{
-        border:1px solid black;
-        border-radius: 1rem;
-        height:3.25rem;
-        padding: 1rem;
-        margin-left:5.2rem;
-        display:flex;
-        align-items:center;
-      }
+#filters::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
+.filter {
+  flex: 0 0 auto;
+  text-align: center;
+  min-width: 80px;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  padding: 5px 10px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
+}
+
+.arrow:hover {
+  background-color: #f0f0f0;
+}
+
+/* Media query: hide arrows on large screens */
+@media (min-width: 768px) {
+  .arrow {
+    display: none;
+  }
+}
+
     </style>
-    <div id="filters">
+
+    <div class="filters-wrapper">
+  <button class="arrow left">&#8249;</button>
+
+     <div id="filters">
       <div class="filter">
         <div> <i class="fa-solid fa-fire"></i></div>
         <p> Trending</p>
@@ -76,6 +110,10 @@
         </div>
       </div>
     </div>
+
+  <button class="arrow right">&#8250;</button>
+</div>
+
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
       <% for (let listing of allListings) { %>
         <a href="/listings/<%=listing._id%>" class="listing-links">
@@ -109,4 +147,15 @@
       }
     }
     });
+  const filters = document.getElementById('filters');
+  const leftArrow = document.querySelector('.arrow.left');
+  const rightArrow = document.querySelector('.arrow.right');
+
+  leftArrow.addEventListener('click', () => {
+    filters.scrollBy({ left: -200, behavior: 'smooth' });
+  });
+
+  rightArrow.addEventListener('click', () => {
+    filters.scrollBy({ left: 200, behavior: 'smooth' });
+  });
   </script>
