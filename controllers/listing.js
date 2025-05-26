@@ -4,9 +4,11 @@ module.exports.index = async (req, res) => {
     const allListings = await Listing.find({});
     res.render("./listings/index.ejs", { allListings });
 };
+
 module.exports.renderNewForm = (req, res) => {
     res.render("./listings/new.ejs");
 };
+
 module.exports.show = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id).populate({
@@ -64,7 +66,6 @@ module.exports.updatelisting = async (req, res) => {
 module.exports.deletelisting = async (req, res) => {
     let { id } = req.params;
     let deletedListing = await Listing.findByIdAndDelete(id);
-    console.log(deletedListing);
     req.flash("success", "Listing Deleted!");
     res.redirect("/listings");
 };

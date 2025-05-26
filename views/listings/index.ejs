@@ -1,156 +1,52 @@
 <% layout("layouts/boilerplate") -%>
-
   <body>
-    <style>
-.filters-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-#filters {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 10px;
-  scrollbar-width: none; /* Firefox */
-}
-
-#filters::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
-}
-
-.filter {
-  flex: 0 0 auto;
-  text-align: center;
-  min-width: 80px;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  padding: 5px 10px;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 1;
-  transition: 0.3s;
-}
-
-.arrow.left {
-  left: 0;
-}
-
-.arrow.right {
-  right: 0;
-}
-
-.arrow:hover {
-  background-color: #f0f0f0;
-}
-.filter{
-  opacity:0.7;
-}
-.filter:hover{
-  opacity:1.5;
-}
-.tax-toggle {
-  margin: 10px;
-  padding: 10px 15px;
-  background-color: #f8f9fa; /* light gray background */
-  border: 1px solid #ccc;
-  border-radius: 12px; /* Rounded corners */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: fit-content;
-}
-
-/* Style the switch more prominently if desired */
-.tax-toggle .form-check-input {
-  cursor: pointer;
-  width: 50px;
-  height: 25px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .tax-toggle {
-    margin: 10px auto;
-    flex-direction: column;
-    text-align: center;
-    padding: 15px;
-  }
-
-  .tax-toggle label {
-    font-size: 14px;
-    margin-top: 8px;
-  }
-}
-
-/* Media query: hide arrows on large screens */
-@media (min-width: 768px) {
-  .arrow {
-    display: none;
-  }
-}
-
-    </style>
-
     <div class="filters-wrapper">
-  <button class="arrow left">&#8249;</button>
-
-     <div id="filters">
-      <div class="filter">
-        <div> <i class="fa-solid fa-fire"></i></div>
-        <p> Trending</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-bed"></i></div>
-        <p> Rooms </p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-mountain-city"></i></div>
-        <p> Mountains </p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-brands fa-fort-awesome"></i></div>
-        <p>Castles</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-person-swimming"></i></div>
-        <p>Amazing pools</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-tent"></i></div>
-        <p>Camping</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-wine-glass"></i></div>
-        <p>Vineyards</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-water"></i></div>
-        <p>Lakefront</p>
-      </div>
-      <div class="filter">
-        <div><i class="fa-solid fa-tree"></i></div>
-        <p>Cabins</p>
-      </div>
-      <div class="tax-toggle">
-        <div class="form-check-reverse form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-          <label class="form-check-label" for="flexSwitchCheckDefault">Display total after Taxes</label>
-        </div>
+  <div id="filters">
+    <div class="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <p>Mountains</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Amazing pools</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-tent"></i></div>
+      <p>Camping</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-wine-glass"></i></div>
+      <p>Vineyards</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-water"></i></div>
+      <p>Lakefront</p>
+    </div>
+    <div class="filter">
+      <div><i class="fa-solid fa-tree"></i></div>
+      <p>Cabins</p>
+    </div>
+       <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        <label class="form-check-label" for="flexSwitchCheckDefault">
+           Total Taxes
+        </label>
       </div>
     </div>
-
-  <button class="arrow right">&#8250;</button>
+  </div>
 </div>
 
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
@@ -186,15 +82,4 @@
       }
     }
     });
-  const filters = document.getElementById('filters');
-  const leftArrow = document.querySelector('.arrow.left');
-  const rightArrow = document.querySelector('.arrow.right');
-
-  leftArrow.addEventListener('click', () => {
-    filters.scrollBy({ left: -200, behavior: 'smooth' });
-  });
-
-  rightArrow.addEventListener('click', () => {
-    filters.scrollBy({ left: 200, behavior: 'smooth' });
-  });
   </script>

@@ -1,0 +1,78 @@
+.filters-wrapper {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
+  width: 100%;
+}
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+}
+
+.filter {
+  text-align: center;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+  gap:10px;
+}
+
+.filter div {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.tax-toggle {
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  #filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 15px;
+    padding-bottom: 5px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  #filters::-webkit-scrollbar {
+    display: none;
+  }
+  .filter {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    font-size: 12px;
+  }
+
+  .filter div {
+    font-size: 18px;
+  }
+    .tax-toggle {
+    flex: 0 0 100%;
+    margin-top: 10px;
+    justify-content: center;
+    text-align: center;
+  }
+}
+.tax-toggle {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Optional: Beautify switch */
+.form-switch .form-check-input {
+  width: 2.5em;
+  height: 1.2em;
+}
+.filter{
+  gap:20px;
+  opacity:0.7;
+}
+.filter:hover{
+  opacity:1.5;
+}

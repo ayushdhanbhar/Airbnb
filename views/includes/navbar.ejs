@@ -16,6 +16,27 @@
     display: inline !important;
     margin-right: 0.5rem !important;
   }
+
+  .btn-search {
+  background-color: #fe424d !important;
+  color: #fff !important;
+  border-radius: 25px !important;
+  padding: 0 1rem !important;
+}
+
+.btn-search:hover {
+  background-color: #fe424d !important;
+  color: #fff !important;
+}
+
+.btn-search i {
+  display: inline !important;
+  margin-right: 0.5rem !important;
+}
+
+.input-group .form-control::placeholder {
+  font-size: 14px;
+}
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
@@ -28,6 +49,28 @@
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Explore</a>
       </div>
+      <!-- Desktop Search Bar (centered) -->
+<form class="d-none d-md-flex mx-auto align-items-center shadow-sm rounded-pill px-3 py-1"
+      style="border: 1px solid #ddd; max-width: 500px; width: 100%;">
+  <input type="text" class="form-control border-0 rounded-pill px-2" placeholder="Anywhere" />
+  <div class="vr mx-2" style="height: 20px;"></div>
+  <input type="text" class="form-control border-0 rounded-pill px-2" placeholder="Any week" />
+  <div class="vr mx-2" style="height: 20px;"></div>
+  <input type="text" class="form-control border-0 rounded-pill px-2" placeholder="Add guests" />
+  <button class="btn btn-search ms-2" type="submit">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+</form>
+
+<!-- Mobile Search Bar (simple & compact) -->
+<form class="d-flex d-md-none mt-2 w-100 px-2">
+  <div class="input-group rounded-pill shadow-sm" style="border: 1px solid #ddd;">
+    <span class="input-group-text bg-white border-0 rounded-start-pill">
+      <i class="fa-solid fa-magnifying-glass text-danger"></i>
+    </span>
+    <input type="text" class="form-control border-0 rounded-end-pill" placeholder="Where to?" />
+  </div>
+</form>
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your Home</a>
         <%if(!currUser){%>
