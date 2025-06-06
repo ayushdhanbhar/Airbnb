@@ -80,7 +80,7 @@ app.use((req, res, next) => {
   res.locals.currUser=req.user;
   next();
 });
-
+app.use(express.static('public'));
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/",usersRouter);
