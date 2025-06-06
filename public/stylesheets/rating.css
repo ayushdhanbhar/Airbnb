@@ -195,3 +195,9 @@
   -webkit-transition: background-position .7s;
   transition: background-position .7s;
 }
+
+/*Map*/
+#map{
+  height:400px;
+  width:80vh;
+}

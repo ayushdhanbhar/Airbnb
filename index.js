@@ -33,14 +33,12 @@ async function main() {
 
 //uses
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "/public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
-app.use(express.static('public'));
-
+app.use(express.static(path.join(__dirname, 'public')));
 const store = MongoStore.create({
   mongoUrl:dbUrl,
   crypto:{
@@ -78,6 +76,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   res.locals.currUser=req.user;
   next();
 });
@@ -90,7 +89,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("./listings/error.ejs", { message });
 });
 
-//run server
+
 app.listen(8080, () => {
   console.log("server is running at port 8080");
 });
