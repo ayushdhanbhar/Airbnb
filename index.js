@@ -4,7 +4,6 @@ if(process.env.NODE_ENV!="production"){
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const listingsRouter = require("./routes/listing.js");
@@ -15,6 +14,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local");
 const User = require('./models/user'); 
+const path = require('path');
+
 
 const dbUrl =process.env.ATLASDB_URL;
 const MongoStore = require('connect-mongo');
