@@ -1,4 +1,5 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
+document.querySelector('.guest-fav-btn').style.visibility = 'hidden';
 (function () {
   'use strict'
 

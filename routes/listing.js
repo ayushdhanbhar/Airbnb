@@ -10,7 +10,7 @@ const listingController = require("../controllers/listing.js");
 
 // New router 
 router.get("/new", isLoggedIn, listingController.renderNewForm);
-
+router.get("/category/:category", listingController.filterByCategory);
 // show router 
 router.route("/").get(wrapAsync(listingController.index))
 .post(isLoggedIn, validateListing,upload.single('listing[image]'), wrapAsync(listingController.createRoute)

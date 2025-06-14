@@ -72,7 +72,76 @@
 .filter{
   gap:20px;
   opacity:0.7;
+  color: #444;
 }
 .filter:hover{
   opacity:1.5;
+}
+/* Guest Favorite Button like Airbnb */
+.guest-fav-btn {
+  position: relative;
+  display: inline-block;
+  background-color: #ffffff;
+  color: #222;
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 9999px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  visibility: visible !important;
+  z-index: 100;
+}
+
+/* Hover style */
+/* .guest-fav-btn:hover {
+  background-color: #f7f7f7;
+} */
+
+/* Wishlist Heart Icon Airbnb Style */
+.wishlist-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.wishlist-icon i {
+  color: #222;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.wishlist-icon:hover {
+  background-color: #ff385c;
+}
+
+.wishlist-icon:hover i {
+  color: #fff;
+}
+
+/* Responsive tweak for small screens */
+@media (max-width: 768px) {
+  .wishlist-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .wishlist-icon i {
+    font-size: 1rem;
+  }
+}
+a{
+  text-decoration: none;
+  color:#222;
+}
+
+.starability-slot input[type="radio"] {
+  margin-right: 5px;
 }

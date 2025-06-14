@@ -15,6 +15,20 @@ module.exports.renderNewForm = (req, res) => {
     res.render("./listings/new.ejs");
 };
 
+
+module.exports.filterByCategory = async (req, res) => {
+  const { category } = req.params;
+  try {
+    const filteredListings = await Listing.find({ category });
+    res.render("listings/filtered", {
+      allListings: filteredListings,
+      title: category.charAt(0).toUpperCase() + category.slice(1)
+    });
+  } catch (err) {
+    res.status(500).send("Error loading category listings.");
+  }
+};
+
 module.exports.show = async (req, res) => {
     let { id } = req.params;
     const listing = await Listing.findById(id).populate({

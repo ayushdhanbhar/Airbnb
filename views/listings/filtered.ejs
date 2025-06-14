@@ -1,0 +1,33 @@
+<% layout("layouts/boilerplate") -%>
+<% if (allListings.length === 0) { %>
+  <div class="text-center my-5">
+    <h4>No listings found in <%= title %> category.</h4>
+    <button class="btn-outline-primary"><a class="nav-link" href="/listings/new">Airbnb your Home</a></button>
+  </div>
+<% } else { %>
+ <h2 class="mb-4"><%= title %></h2>
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+  <% for (let listing of allListings) { %>
+    <a href="/listings/<%= listing._id %>" class="listing-links text-decoration-none text-dark">
+      <div class="card col listing-card shadow-sm position-relative overflow-hidden">
+        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem; object-fit: cover;">
+        <div class="card-img-overlay d-flex justify-content-between align-items-start p-3">
+          <button class="guest-fav-btn">Guest favorite</button>
+          <div class="wishlist-icon">
+            <i class="fa-regular fa-heart"></i>
+          </div>
+        </div>
+        <div class="card-body">
+          <p class="card-title fw-bold fs-5 mb-1"><%= listing.title %></p>
+          <p class="card-text mb-0">
+            &#8377; <%= listing.price.toLocaleString("en-IN") %> <span class="text-muted">/ night</span>
+          </p>
+          <small class="text-muted tax-info">+18% GST</small>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+<% } %>
+
+

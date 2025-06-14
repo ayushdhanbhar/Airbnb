@@ -1,101 +1,160 @@
 <% layout("layouts/boilerplate") -%>
-<div class="row mt-3">
-    <div class="col-8 offset-3">
-        <h2><%= listing.title %></h2>
-    </div>
 
-    <div class="card col-6 offset-3 show-card listing-card">
-        <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
-        <div class="card-body">
-            <p class="card-text"><i>Owner By: <%= listing.owner?.username || 'Unknown' %></i></p>
-            <p class="card-text"><%= listing.description %></p>
-            <p class="card-text">&#8377; <%= listing.price.toLocaleString("en-IN") %></p>
-            <p class="card-text"><%= listing.location %></p>
-            <p class="card-text"><%= listing.country %></p>
+<div class="container mt-5">
+  <!-- Listing Title -->
+  <div class="text-center mb-4">
+    <h2 class="fw-bold display-5"><%= listing.title %></h2>
+  </div>
+
+  <!-- Image and Info -->
+<div class="row mb-5">
+  <div class="col-md-8 offset-md-2">
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+      
+      <!-- Listing Image -->
+      <div class="position-relative">
+        <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 420px; object-fit: cover;">
+        <!-- <% if (listing.category) { %>
+          <span class="badge bg-light text-dark position-absolute top-0 start-0 m-3 px-3 py-2 shadow-sm fs-6 rounded-pill text-capitalize">
+            <i class="fa-solid fa-tag me-1 text-primary"></i> <%= listing.category %>
+          </span>
+        <% } %> -->
+      </div>
+
+      <!-- Listing Details -->
+      <div class="card-body p-4">
+        <div class="mb-2 text-muted">
+          <i class="fa-solid fa-user-circle me-1"></i> 
+          <span>Hosted by <strong><%= listing.owner?.username || 'Unknown' %></strong></span>
         </div>
-    </div>
 
-    <% if (currUser && listing.owner && listing.owner._id.equals(currUser._id)) { %>
-    <div class="btns">
-        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a><br>
-        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-            <button class="btn btn-dark offset-5">Delete</button>
-        </form>
-    </div>
-    <% } %>
+        <p class="mb-3 fs-6 text-secondary"><%= listing.description %></p>
 
-    <div class="col-8 offset-3 mb-3">
-        <% if (currUser) { %>
+        <div class="d-flex justify-content-between flex-wrap mb-2">
+          <div>
+            <p class="fs-5 text-success fw-semibold">
+              &#8377; <%= listing.price.toLocaleString("en-IN") %> 
+              <small class="text-muted fs-6">/ night</small>
+            </p>
+          </div>
+          <div class="text-end">
+            <i class="fa-solid fa-location-dot text-danger"></i>
+            <span class="fw-medium"><%= listing.location %>, <%= listing.country %></span>
+          </div>
+        </div>
+
         <hr />
-        <h4>Leave a Review</h4>
-        <form action="/listings/<%= listing.id %>/reviews" method="POST" class="needs-validation">
-            <div class="mb-3 mt-3">
-                <label for="rating" class="form-label">Rating</label>
-                <fieldset class="starability-slot">
-                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked />
-                    <% for(let i=1;i<=5;i++){ %>
-                        <input type="radio" id="rate-<%= i %>" name="review[rating]" value="<%= i %>" />
-                        <label for="rate-<%= i %>"><%= i %> star<%= i > 1 ? 's' : '' %></label>
-                    <% } %>
-                </fieldset>
-            </div>
-            <div class="mb-3 mt-3">
-                <label for="comment" class="form-label">Comments</label>
-                <textarea name="review[comment]" id="comment" cols="30" rows="5" class="form-control" required></textarea>
-                <div class="invalid-feedback">Please add some comments for review</div>
-            </div>
-            <button class="btn btn-outline-dark">Submit</button>
-        </form>
-        <% } %>
-
-        <% if(listing.reviews.length > 0){ %>
-            <hr/>
-        <div class="row">
-            <p>All Reviews</p>
-            <% for (let review of listing.reviews) { %>
-                <div class="card col-5 mb-3 ms-3 col-3">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            @<%= review.author?.username || 'Unknown User' %>
-                        </h5>
-                        <p class="starability-result" data-rating="<%= review.rating %>">
-                            Rated: <%= review.rating %> star<%= review.rating > 1 ? 's' : '' %>
-                        </p>
-                        <p class="card-text"><%= review.comment %></p>
-                        <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                            <button class="btn btn-dark">Delete</button>
-                        </form>
-                    </div>
-                </div>
-            <% } %>
+        
+        <!-- Quick features -->
+        <div class="d-flex flex-wrap gap-3 mt-3">
+          <span class="badge bg-outline-primary text-dark border border-primary rounded-pill px-3 py-2">
+            <i class="fa-solid fa-bed me-1"></i> 2 Beds
+          </span>
+          <span class="badge bg-outline-primary text-dark border border-primary rounded-pill px-3 py-2">
+            <i class="fa-solid fa-bath me-1"></i> 1 Bath
+          </span>
+          <span class="badge bg-outline-primary text-dark border border-primary rounded-pill px-3 py-2">
+            <i class="fa-solid fa-wifi me-1"></i> Free Wi-Fi
+          </span>
+          <span class="badge bg-outline-primary text-dark border border-primary rounded-pill px-3 py-2">
+            <i class="fa-solid fa-utensils me-1"></i> Kitchen
+          </span>
         </div>
-        <% } %>
+      </div>
     </div>
-
-    <div class="col-6 offset-3 mb-3">
-        <h3>Where you'll be</h3>
-        <div id="map" style="width: 100%; height: 400px;"></div>
-    </div>
+  </div>
 </div>
-<!-- Mapbox CSS -->
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 
-<!-- Mapbox JS -->
+
+  <!-- Edit/Delete Buttons -->
+  <% if (currUser && listing.owner && listing.owner._id.equals(currUser._id)) { %>
+    <div class="text-center mb-5">
+      <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark me-2"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="d-inline">
+        <button class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
+      </form>
+    </div>
+  <% } %>
+
+  <!-- Review Form -->
+  <% if (currUser) { %>
+    <div class="col-md-8 offset-md-2 mb-5">
+      <hr />
+      <h4>Leave a Review</h4>
+      <form action="/listings/<%= listing.id %>/reviews" method="POST" class="needs-validation">
+        <div class="mb-3 mt-3">
+          <label for="rating" class="form-label">Rating</label>
+          <fieldset class="starability-slot">
+            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked />
+            <% for(let i=1;i<=5;i++){ %>
+              <input type="radio" id="rate-<%= i %>" name="review[rating]" value="<%= i %>" />
+              <label for="rate-<%= i %>"><%= i %> star<%= i > 1 ? 's' : '' %></label>
+            <% } %>
+          </fieldset>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="comment" class="form-label">Comments</label>
+          <textarea name="review[comment]" id="comment" cols="30" rows="4" class="form-control" required></textarea>
+          <div class="invalid-feedback">Please add some comments for review</div>
+        </div>
+        <button class="btn btn-dark">Submit</button>
+      </form>
+    </div>
+  <% } %>
+
+  <!-- Reviews List -->
+  <% if(listing.reviews.length > 0){ %>
+    <div class="col-md-10 offset-md-1 mb-5">
+      <hr />
+      <h5 class="mb-3">All Reviews</h5>
+      <div class="row g-3">
+        <% for (let review of listing.reviews) { %>
+          <div class="col-md-6">
+            <div class="card shadow-sm border-0 rounded-3">
+              <div class="card-body">
+                <h6 class="fw-semibold">@<%= review.author?.username || 'Unknown User' %></h6>
+                <p class="starability-result text-warning" data-rating="<%= review.rating %>">
+                  Rated: <%= review.rating %> star<%= review.rating > 1 ? 's' : '' %>
+                </p>
+                <p class="text-muted"><%= review.comment %></p>
+                <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                  <button class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-trash-can"></i> Delete</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  <% } %>
+
+  <!-- Map Section -->
+  <div class="col-md-10 offset-md-1">
+    <h4 class="mb-3">Where you'll be</h4>
+    <div id="map" class="rounded-3 shadow" style="width: 100%; height: 400px;"></div>
+  </div>
+</div>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<!-- Mapbox CSS & JS -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
 
+<!-- Mapbox Script -->
 <script>
+
   const mapToken = "<%= MAP_TOKEN %>";
   mapboxgl.accessToken = mapToken;
   const coordinates = <%- JSON.stringify(listing.geometry.coordinates) %>;
-       
+
   const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v12',
     center: coordinates,
-    zoom:9
+    zoom: 9
   });
 
-  const marker = new mapboxgl.Marker({ color: "red" })
-    .setLngLat(coordinates)
-    .addTo(map);
+  new mapboxgl.Marker({ color: "red" }).setLngLat(coordinates).addTo(map);
 </script>
