@@ -14,8 +14,7 @@ const ListingSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ["room","farm","mountain","tower","windmills", "luxe", "park", "artic", "tyhome", "urban","castle","beach","camping","countryside"],
-    required: true
+    enum: ["room","farms","mountain","Towers","windmills", "park", "artic", "tyhome", "urban","castle","beach","camping","countryside"]
   },
   price: Number,
   location: String,

@@ -65,6 +65,35 @@ module.exports.createRoute = async (req, res) => {
     req.flash("success", "New Listing Created!");
     res.redirect("/listings");
 };
+// controllers/listingController.js
+
+
+
+// Update listing category
+module.exports.editCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { newCategory } = req.body;
+
+    const updatedListing = await Listing.findByIdAndUpdate(
+      id,
+      { category: newCategory },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedListing) {
+      return res.status(404).json({ message: "Listing not found" });
+    }
+
+    res.status(200).json({
+      message: "Category updated successfully",
+      listing: updatedListing
+    });
+  } catch (error) {
+    console.error("Error updating category:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 module.exports.edit = async (req, res) => {
     let { id } = req.params;

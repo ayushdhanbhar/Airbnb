@@ -1,13 +1,13 @@
 .filters-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   overflow-x: auto;
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
   padding: 1rem 1.5rem;
   background-color: #fff;
-  gap: 1rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
   position: relative;
 }

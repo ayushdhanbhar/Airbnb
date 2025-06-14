@@ -13,7 +13,7 @@
         </div>
         <div class="filter">
           <div>
-            <a href="/listings/category/farm">
+            <a href="/listings/category/farms">
               <i class="fa-solid fa-tractor"></i>
             </a>
           </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="filter">
           <div>
-            <a href="/listings/category/tower">
+            <a href="/listings/category/Towers">
               <i class="fa-solid fa-tower-observation"></i>
             </a>
           </div>
@@ -118,36 +118,44 @@
       </div>
     </div>
     </div>
-   
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-3">
-      <% for (let listing of allListings) { %>
+ <% const sections = [
+ { title: "Beach & Waterfront Homes", categories: ["beach", "artic"] },
+  { title: "Unique & Iconic Escapes", categories: ["castle", "Towers", "windmills"] },
+  { title: "Cozy & Compact Living", categories: ["room", "tyhome"] },
+    { title: "Stay Amidst Nature", categories: ["mountain", "farms", "countryside"] },
+  { title: "Urban Adventures & Parks", categories: ["urban", "park", "camping"] },
+]; %>
+<% for (let section of sections) { %>
+  <h3 class="mb-2 mt-2"><%= section.title %></h3>
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-3">
+    <% for (let listing of allListings) { %>
+      <% if (section.categories.includes(listing.category)) { %>
         <div class="col mb-4">
           <a href="/listings/<%= listing._id %>" class="listing-links text-decoration-none text-dark">
-            <div class="card listing-card shadow-sm position-relative overflow-hidden h-100">
-              <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"
+            <div class="card listing-card shadow-sm position-relative overflow-hidden h-100 rounded-4">
+              <img src="<%= listing.image.url %>" class="card-img-top rounded-top-4" alt="listing_image"
                 style="height: 20rem; object-fit: cover;">
-             
               <div class="card-img-overlay d-flex justify-content-between align-items-start p-3">
-                <button class="guest-fav-btn">Guest favorite</button>
+                <button class="guest-fav-btn btn btn-light btn-sm rounded-pill fw-bold shadow-sm">Guest favourite</button>
                 <div class="wishlist-icon">
-                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-heart fs-5 text-dark"></i>
                 </div>
               </div>
               <div class="card-body">
-                <p class="card-title fw-bold fs-5 mb-1">
-                  <%= listing.title %>
-                </p>
+                <p class="card-title fw-semibold fs-5 mb-1"><%= listing.title %></p>
                 <p class="card-text mb-0">
-                  &#8377; <%= listing.price.toLocaleString("en-IN") %> <span class="text-muted">per night</span>
+                  &#8377; <%= listing.price.toLocaleString("en-IN") %>
+                  <span class="text-muted">per night</span>
                 </p>
                 <small class="text-muted tax-info">+18% GST</small>
               </div>
             </div>
           </a>
         </div>
-        <% } %>
-    </div>
-
+      <% } %>
+    <% } %>
+  </div>
+<% } %>
   </body>
 
   <script>
