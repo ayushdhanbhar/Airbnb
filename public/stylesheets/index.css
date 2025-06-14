@@ -62,7 +62,9 @@
   align-items: center;
   gap: 0.5rem;
 }
-
+.tax-info {
+  display: none;
+}
 .tax-toggle .form-check-label {
   margin-right: 0.5rem;
   font-size: 0.85rem;
@@ -168,4 +170,13 @@ a{
 .starability-slot input[type="radio"] {
   margin-right: 5px;
 }
-
+/* #wq {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid black;
+  padding: 10px 15px;
+  width: fit-content; 
+  border-radius: 8px;
+  font-family: sans-serif;
+} */

@@ -46,14 +46,6 @@
         </div>
         <div class="filter">
           <div>
-            <a href="/listings/category/luxe">
-              <i class="fa-solid fa-gem"></i>
-            </a>
-          </div>
-          <p>Luxe</p>
-        </div>
-        <div class="filter">
-          <div>
             <a href="/listings/category/park">
               <i class="fa-solid fa-tree"></i>
             </a>
@@ -117,11 +109,11 @@
           <p>Countryside</p>
         </div>
       </div>
-       <div class="tax-toggle">
+       <div class="tax-toggle" id="wq">
       <div class="form-check-reverse form-switch">
-        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+        <input class="form-check-input" type="checkbox" id="checkout">
         <label class="form-check-label" for="flexSwitchCheckDefault">
-         <p>Display Total Taxes</p>
+          <span class="badge text-bg-warning">Display Total Taxes</span>
         </label>
       </div>
     </div>
@@ -159,15 +151,15 @@
   </body>
 
   <script>
-    let taxswitch = document.getElementById("flexSwitchCheckDefault");
-    taxswitch.addEventListener("click", () => {
-      let taxInfo = document.getElementsByClassName("tax-info");
-      for (info of taxInfo) {
-        if (info.style.display != "inline") {
-          info.style.display = "inline";
-        } else {
-          info.style.display = "none";
-        }
-      }
-    });
-  </script>
+ let taxswitch = document.getElementById("checkout");
+taxswitch.addEventListener("click", () => {
+  let taxInfo = document.getElementsByClassName("tax-info");
+  for (let info of taxInfo) {
+    if (info.style.display === "inline") {
+      info.style.display = "none";
+    } else {
+      info.style.display = "inline";
+    }
+  }
+});
+ </script>
