@@ -4,7 +4,7 @@ module.exports.signup = async (req, res) => {
         let { username, email, password } = req.body;
         if (!username || !email || !password) {
             req.flash("error", "All fields are required");
-            return res.redirect("/signup");
+            return res.redirect("/");
         }
         const newUser = new User({ email, username });
         const registeredUser = await User.register(newUser, password);
@@ -15,7 +15,7 @@ module.exports.signup = async (req, res) => {
         });
     } catch (e) {
         req.flash("error", e.message);
-        res.redirect("/signup");
+        res.redirect("/");
     }
 };
 
