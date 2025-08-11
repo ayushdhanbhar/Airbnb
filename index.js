@@ -39,6 +39,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, 'public')));
+//manage the session 
 const store = MongoStore.create({
   mongoUrl:dbUrl,
   crypto:{
@@ -80,6 +81,7 @@ app.use((req, res, next) => {
   res.locals.currUser=req.user;
   next();
 });
+
 app.use(express.static('public'));
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
@@ -88,7 +90,6 @@ app.use((err, req, res, next) => {
   let { statusCode = 500, message = "something went wrong!" } = err;
   res.status(statusCode).render("./listings/error.ejs", { message });
 });
-
 
 app.listen(8080, () => {
   console.log("server is running at port 8080");

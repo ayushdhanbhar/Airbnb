@@ -7,6 +7,7 @@ const multer  = require('multer')
 const {storage} = require("../cloudconfig.js");
 const upload = multer({ storage })
 const listingController = require("../controllers/listing.js");
+const { data: sampleListings } = require("../init/data");
 
 // New router 
 router.get("/new", isLoggedIn, listingController.renderNewForm);
@@ -27,5 +28,16 @@ upload.single('listing[image]'), validateListing, wrapAsync(listingController.up
 router.get("/:id/edit",
     isLoggedIn,isOwner, wrapAsync(listingController.edit)
 );
+
+router.get("/search", (req, res) => {
+  const query = req.query.q?.toLowerCase() || "";
+
+  const filteredListings = sampleListings.filter((listing) =>
+    listing.location.toLowerCase().includes(query) ||
+    listing.country.toLowerCase().includes(query)
+  );
+
+  res.render("listings/index", { listings: filteredListings, searchQuery: req.query.q });
+});
 
 module.exports = router;
