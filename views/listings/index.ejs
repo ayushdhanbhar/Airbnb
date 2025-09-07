@@ -126,7 +126,7 @@
   { title: "Urban Adventures & Parks", categories: ["urban", "park", "camping"] },
 ]; %>
 <% for (let section of sections) { %>
-  <h3 class="mb-2 mt-2"><%= section.title %></h3>
+  <h3 class="mb-4 mt-4 text-muted text-center"><%= section.title %></h3>
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mt-3">
     <% for (let listing of allListings) { %>
       <% if (section.categories.includes(listing.category)) { %>
