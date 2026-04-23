@@ -12,6 +12,7 @@ const { data: sampleListings } = require("../init/data");
 // New router 
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 router.get("/category/:category", listingController.filterByCategory);
+
 // show router 
 router.route("/").get(wrapAsync(listingController.index))
 .post(isLoggedIn, validateListing,upload.single('listing[image]'), wrapAsync(listingController.createRoute)
@@ -31,12 +32,10 @@ router.get("/:id/edit",
 
 router.get("/search", (req, res) => {
   const query = req.query.q?.toLowerCase() || "";
-
   const filteredListings = sampleListings.filter((listing) =>
     listing.location.toLowerCase().includes(query) ||
     listing.country.toLowerCase().includes(query)
   );
-
   res.render("listings/index", { listings: filteredListings, searchQuery: req.query.q });
 });
 
